@@ -65,7 +65,7 @@ class Evento(models.Model):
     descricao = models.TextField(verbose_name="Descrição do Evento")
 
     def __str__(self):
-        return f"{self.nome}, {self.instituicao}, {self.data}, {self.local}, {self.descricao}"
+        return f"{self.nome}, {self.instituicao}, {self.data_hora}, {self.local}, {self.descricao}"
 
     class Meta:
         verbose_name = "Evento"
