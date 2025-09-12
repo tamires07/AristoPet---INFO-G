@@ -2,18 +2,19 @@ from django.db import models
 
 class Pessoa(models.Model):
     nome = models.CharField(max_length=100, verbose_name="Nome Completo")
-    idade = models.IntegerField(verbose_name="Idade")
+    data_nasc = models.DateField(verbose_name="Data de nascimento")
     endereco = models.CharField(max_length=200, verbose_name="Endereço")
-    email = models.EmailField(verbose_name="Email")
-    senha = models.CharField(max_length=100, verbose_name="Senha")
+    email = models.EmailField(unique=True, verbose_name="Email")
+    senha = models.CharField(unique=True, max_length=100, verbose_name="Senha")
     telefone = models.CharField(max_length=15, verbose_name="Telefone")
 
     def __str__(self):
-        return f"{self.nome}, {self.idade}, {self.endereco}, {self.email}, {self.senha}, {self.telefone}"
+        return f"{self.nome}, {self.data_nasc}, {self.endereco}, {self.email}, {self.senha}, {self.telefone}"
 
     class Meta:
         verbose_name = "Pessoa"
         verbose_name_plural = "Pessoas"
+
 
 class Instituicao(models.Model):
     nome = models.CharField(max_length=100, verbose_name="Nome da Instituição")
