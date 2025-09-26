@@ -8,5 +8,7 @@ urlpatterns = [
     path('', IndexView.as_view(), name='index'),
     path('login/', login_view, name='login'),
     path('pessoa/', PessoaView.as_view(), name='pessoa'),
-    path('buscar/', buscar, name='buscar'),
+    path('buscar/', buscarView, name='buscar'),
+    path('cadastraranimal/', cadastrarAnimalView, name='cadastraranimal'),
+
 ]

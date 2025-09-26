@@ -2,13 +2,15 @@ from django.shortcuts import render,redirect,get_object_or_404
 from .models import *
 from django.views import View
 from django.contrib import messages
-from .forms import LoginForm
+from .forms import *
+
+from .models import Animal
 
 class IndexView(View):
     def get(self, request, *args, **kwargs):
-        return render(request, 'index.html')
-    def post(self, request):
-        pass
+        animais = Animal.objects.all()  # pega todos os animais do banco
+        return render(request, 'index.html', {'animais': animais})
+
 
 class PessoaView(View):
     def get(self, request, *args, **kwargs):
@@ -28,9 +30,27 @@ def login_view(request):
             
     return render(request, 'login.html')
 
-def buscar(request):
+def buscarView(request):
     query = request.GET.get('q', '')
     resultados = []
     if query:
         resultados = Animal.objects.filter(nome__icontains=query)  # busca no nome, exemplo
     return render(request, 'buscar.html', {'resultados': resultados, 'query': query})
+
+
+def cadastrarAnimalView(request):
+    if request.method == 'POST':
+        form = AnimalForm(request.POST)
+        if form.is_valid():
+            animal = form.save(commit=False)
+            # Aqui você define o doador (ex: o usuário logado)
+            # animal.doador = request.user.pessoa  # se estiver usando autenticação com Pessoa
+            animal.doador = Pessoa.objects.first() # temporário para teste
+            animal.save()
+            messages.success(request, 'Animal cadastrado com sucesso!')
+            return redirect('index')  # ou outra rota
+        else:
+            messages.error(request, 'Erro no formulário. Verifique os dados.')
+    else:
+        form = AnimalForm()
+    return render(request, 'cadastraranimal.html', {'form': form})

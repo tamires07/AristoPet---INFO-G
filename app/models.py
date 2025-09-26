@@ -2,7 +2,7 @@ from django.db import models
 
 class Pessoa(models.Model):
     nome = models.CharField(max_length=100, verbose_name="Nome Completo")
-    data_nasc = models.DateField(verbose_name="Data de nascimento")
+    data_nasc = models.DateField(verbose_name="Data de nascimento", null=True, blank=True)
     endereco = models.CharField(max_length=200, verbose_name="Endereço")
     email = models.EmailField(unique=True, verbose_name="Email")
     senha = models.CharField(unique=True, max_length=100, verbose_name="Senha")
