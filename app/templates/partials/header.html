@@ -6,20 +6,15 @@
     <title>Cabeçalho</title>
     <style>
         .navbar-custom {
-            background-color: #33605a;
+            background-color: #314045;
             font-family: Arial, Helvetica, sans-serif;
         }
-        
     </style>
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark navbar-custom">
         <div class="container-fluid">
-            {% load static %}
-            <a class="navbar-brand d-flex align-items-center" href="#">
-                <img src="{% static 'img/logo.png' %}" alt="Logo AristoPet" width="40" height="40" class="me-2">
-                AristoPet
-            </a>
+            <a class="navbar-brand" href="#">Terceira Idade Ativa</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02"
                 aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -27,23 +22,32 @@
             <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="/">Perfil</a>
+                        <a class="nav-link active" aria-current="page" href="/">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="{% url 'index' %}">Início</a>
+                        <a class="nav-link active" aria-current="page" href="/pessoa/">Perfil</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="/cadastraranimal/">Cadastrar Animais</a>
+                        <a class="nav-link active" aria-current="page" href="/progresso/">Progresso</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/agenda/">Agenda</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="/evento/">Eventos</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="/pessoa/">Cadastro/Login</a>
-                    </li>   
+                        <a class="nav-link active" aria-current="page" href="/lembrete/">Lembretes</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/experiencia/">Experiências</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/feedback/">Feedback</a>
+                    </li>
                 </ul>
-                <form class="d-flex" role="search" action="{% url 'buscar' %}" method="GET">
-                    <input name="q" class="form-control me-2" type="search" placeholder="Pesquisar" aria-label="Search"/>
+                <form class="d-flex" role="search">
+                    <input class="form-control me-2" type="search" placeholder="Pesquisar" aria-label="Search"/>
                     <button class="btn btn-success" type="submit">Buscar</button>
                 </form>
             </div>

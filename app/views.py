@@ -1,56 +1,70 @@
-from django.shortcuts import render,redirect,get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import *
 from django.views import View
 from django.contrib import messages
-from .forms import *
-
-from .models import Animal
 
 class IndexView(View):
     def get(self, request, *args, **kwargs):
-        animais = Animal.objects.all()  # pega todos os animais do banco
-        return render(request, 'index.html', {'animais': animais})
+        return render(request, 'index.html')
+    def post(self, request):
+        pass
 
-
+class Caracteristica_ObjetivoView(View):
+    def get(self, request, *args, **kwargs):
+        caracteristica_objetivo = Caracteristica_Objetivo.objects.all()
+        return render(request, 'caracteristica_objetivo.html', {'caracteristica_objetivo':Caracteristica_Objetivo})
+    
 class PessoaView(View):
     def get(self, request, *args, **kwargs):
         pessoa = Pessoa.objects.all()
-        return render(request, 'pessoa.html', {'pessoa':pessoa})
-    
-def login_view(request):
-    if request.method == 'POST':
-        email = request.POST.get('email')
-        senha = request.POST.get('senha')
-        
-        try:
-            pessoa = Pessoa.objects.get(email=email, senha=senha)
-            return redirect('home')
-        except Pessoa.DoesNotExist:
-            messages.error(request, 'Email ou senha incorretos.')
-            
-    return render(request, 'login.html')
+        return render(request, 'pessoa.html', {'pessoa':Pessoa})
 
-def buscarView(request):
-    query = request.GET.get('q', '')
-    resultados = []
-    if query:
-        resultados = Animal.objects.filter(nome__icontains=query)  # busca no nome, exemplo
-    return render(request, 'buscar.html', {'resultados': resultados, 'query': query})
+class AgendaView(View):
+    def get(self, request, *args, **kwargs):
+        agenda = Agenda.objects.all()
+        return render(request, 'agenda.html', {'agenda':Agenda})
 
+class EventoView(View):
+    def get(self, request, *args, **kwargs):
+        evento = Evento.objects.all()
+        return render(request, 'evento.html', {'evento':Evento})
 
-def cadastrarAnimalView(request):
-    if request.method == 'POST':
-        form = AnimalForm(request.POST)
-        if form.is_valid():
-            animal = form.save(commit=False)
-            # Aqui você define o doador (ex: o usuário logado)
-            # animal.doador = request.user.pessoa  # se estiver usando autenticação com Pessoa
-            animal.doador = Pessoa.objects.first() # temporário para teste
-            animal.save()
-            messages.success(request, 'Animal cadastrado com sucesso!')
-            return redirect('index')  # ou outra rota
-        else:
-            messages.error(request, 'Erro no formulário. Verifique os dados.')
-    else:
-        form = AnimalForm()
-    return render(request, 'cadastraranimal.html', {'form': form})
+class LembreteView(View):
+    def get(self, request, *args, **kwargs):
+        lembrete = Lembrete.objects.all()
+        return render(request, 'lembrete.html', {'lembrete':Lembrete})
+
+class Dieta_ObjetivoView(View):
+    def get(self, request, *args, **kwargs):
+        dieta_objetivo = Dieta_Objetivo.objects.all()
+        return render(request, 'dieta_objetivo.html', {'dieta_objetivo':Dieta_Objetivo})
+
+class Plano_AtividadeView(View):
+    def get(self, request, *args, **kwargs):
+        plano_atividade = Plano_Atividade.objects.all()
+        return render(request, 'plano_atividade.html', {'plano_atividade':Plano_Atividade})
+
+class ExercicioView(View):
+    def get(self, request, *args, **kwargs):
+        exercicio = Exercicio.objects.all()
+        return render(request, 'exercicio.html', {'exercicio':Exercicio})
+
+class Filtrar_AtividadeView(View):
+    def get(self, request, *args, **kwargs):
+        filtrar_atividade = Filtrar_Atividade.objects.all()
+        return render(request, 'exercicio.html', {'filtrar_atividade':Filtrar_Atividade})
+
+class ExperienciaView(View):
+    def get(self, request, *args, **kwargs):
+        experiencia = Experiencia.objects.all()
+        return render(request, 'experiencia.html', {'experiencia':Experiencia})
+
+class ProgressoView(View):
+    def get(self, request, *args, **kwargs):
+        progresso = Progresso.objects.all()
+        return render(request, 'progresso.html', {'progresso':Progresso})
+
+class FeedbackView(View):
+    def get(self, request, *args, **kwargs):
+        feedback = Feedback.objects.all()
+        return render(request, 'feedback.html', {'feedback':Feedback})
