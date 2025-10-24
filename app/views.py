@@ -39,7 +39,7 @@ def buscarView(request):
 
 def cadastrarAnimalView(request):
     if request.method == 'POST':
-        form = AnimalForm(request.POST)
+        form = AnimalForm(request.POST, request.FILES)
         if form.is_valid():
             animal = form.save(commit=False)
             # Aqui você define o doador (ex: o usuário logado)
@@ -53,3 +53,10 @@ def cadastrarAnimalView(request):
     else:
         form = AnimalForm()
     return render(request, 'cadastraranimal.html', {'form': form})
+
+
+def deletarAnimalView(request, pk):
+    animal = get_object_or_404(Animal, pk=pk)
+    animal.delete()
+    messages.success(request, 'Animal deletado com sucesso!')
+    return redirect('index')

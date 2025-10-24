@@ -8,4 +8,4 @@ class LoginForm(forms.Form):
 class AnimalForm(forms.ModelForm):
     class Meta:
         model = Animal
-        fields = ['nome', 'especie', 'genero', 'cidade']
+        fields = ['nome', 'especie', 'genero', 'cidade', 'imagem']

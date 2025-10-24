@@ -37,9 +37,10 @@ class Animal(models.Model):
     genero = models.CharField(max_length=50, verbose_name="Gênero")
     cidade = models.CharField(max_length=100, verbose_name="Cidade")
     doador = models.ForeignKey(Pessoa, on_delete=models.CASCADE, verbose_name="Doador")
+    imagem = models.ImageField(upload_to='animais/', blank=True, null=True)
 
     def __str__(self):
-        return f"{self.nome}, {self.especie}, {self.genero}, {self.cidade}, Doador: {self.doador}"
+        return f"{self.nome}, {self.especie}, {self.genero}, {self.cidade}, Doador: {self.doador}, {self.imagem}"
 
     class Meta:
         verbose_name = "Animal"
