@@ -1,13 +1,20 @@
 from django.db import models
+from django.contrib.auth.hashers import make_password, check_password
 
 class Pessoa(models.Model):
     nome = models.CharField(max_length=100, verbose_name="Nome Completo")
     data_nasc = models.DateField(verbose_name="Data de nascimento", null=True, blank=True)
     endereco = models.CharField(max_length=200, verbose_name="Endereço")
     email = models.EmailField(unique=True, verbose_name="Email")
-    senha = models.CharField(unique=True, max_length=100, verbose_name="Senha")
+    senha = models.CharField(max_length=128, verbose_name="Senha")
     telefone = models.CharField(max_length=15, verbose_name="Telefone")
 
+    def set_password(self, raw_password):
+        self.senha = make_password(raw_password)
+
+    def check_password(self, raw_password):
+        return check_password(raw_password, self.senha)
+    
     def __str__(self):
         return f"{self.nome}, {self.data_nasc}, {self.endereco}, {self.email}, {self.senha}, {self.telefone}"
 
@@ -37,6 +44,7 @@ class Animal(models.Model):
     genero = models.CharField(max_length=50, verbose_name="Gênero")
     cidade = models.CharField(max_length=100, verbose_name="Cidade")
     doador = models.ForeignKey(Pessoa, on_delete=models.CASCADE, verbose_name="Doador")
+    descricao = models.TextField(blank=True, null=True)
     imagem = models.ImageField(upload_to='animais/', blank=True, null=True)
 
     def __str__(self):

@@ -38,18 +38,30 @@
     {% include 'partials/header.html' %}
 
     <!-- Mensagem de boas vindas -->
+    
     <div class="container text-center">
         <h1><b>Realize seu Login</b></h1>
     </div>
-    <form class="formulario" method="post">
+
+    {% if messages %}
+    <div class="container mt-3">
+        {% for message in messages %}
+            <div class="alert {% if message.tags %}alert-{{ message.tags }}{% else %}alert-info{% endif %}" role="alert">
+                {{ message }}
+            </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <form class="formulario" method="post" action="{% url 'login' %}">
         {% csrf_token %}
         <div class="mb-3">
             <label for="email" class="form-label"><b>Email</b></label>
-            <input type="email" class="form-control" id="email" name="email" required>
+            <input type="email" class="form-control" id="email" name="email" placeholder="Digite seu email" required>
         </div>
         <div class="mb-3">
             <label for="senha" class="form-label"><b>Senha</b></label>
-            <input type="password" class="form-control" id="senha" name="senha" required>
+            <input type="password" class="form-control" id="senha" name="senha" placeholder="Digite sua senha" required>
         </div>
         
         <button type="submit" class="btn btn-success">Enviar</button>

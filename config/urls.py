@@ -13,6 +13,9 @@ urlpatterns = [
     path('buscar/', buscarView, name='buscar'),
     path('cadastraranimal/', cadastrarAnimalView, name='cadastraranimal'),
     path('deletaranimal/<int:pk>/', deletarAnimalView, name='deletaranimal'),
+    path('cadastro/', cadastrar_usuario, name='cadastro'),
+    path('logout/', logout_view, name='logout'),
+    path('animal/<int:pk>/', detalhe_animal, name='detalheanimal'),
 ]
 
 if settings.DEBUG:

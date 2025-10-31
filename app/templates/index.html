@@ -57,7 +57,6 @@
 
         .container {
             font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-            margin-top: 20px;
             margin-bottom: 20px;
             justify-content: center;
         }
@@ -74,6 +73,13 @@
             justify-content: center;
             align-items: center;
         }
+
+        h2{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 30px;
+        }
     </style>
 </head>
 
@@ -81,6 +87,10 @@
     {% include 'partials/header.html' %}
 
     <!-- Mensagem de boas vindas -->
+    {% if pessoa %}
+        <h2 class="text">Olá, {{ pessoa.nome }}! 🐾</h2>
+    {% endif %}
+    
     <div class="container text-center">
         <h1><b>Bem vindo ao AristoPet</b></h1>
         <p>
@@ -114,7 +124,7 @@
                             Cidade: {{ animal.cidade }}
                         </p>
                         <!-- Link de exemplo, ajuste se quiser -->
-                        <a href="#" class="btn btn-success">Entrar</a>
+                        <a href="{% url 'detalheanimal' animal.pk %}" class="btn btn-success">Entrar</a>
                         <a href="{% url 'deletaranimal' animal.pk %}" class="btn btn-danger">Excluir</a>
                     </div>
                 </div>

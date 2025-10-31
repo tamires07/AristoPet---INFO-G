@@ -28,6 +28,27 @@
         border-radius: 30px;
         text-align: center;
     }
+
+    .formulario, input, select, textarea{
+            text-align: center;
+    }
+
+    input[type="file"] {
+        display: none;
+    }
+
+    .custom-file-upload {
+        background-color: #245ac0;
+        color: white;
+        padding: 8px 15px;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    .custom-file-upload:hover {
+        background-color: #163392;
+    }
     </style>
 </head>
 <body>
@@ -45,11 +66,48 @@
 
     <form method="post" class="formulario" enctype="multipart/form-data">
         {% csrf_token %}
-        {{ form.as_p }}
+        <div class="mb-3">
+            <label for="id_nome" class="form-label"><b>Nome</b></label>
+            <input type="text" name="nome" id="id_nome" class="form-control" placeholder="Digite o nome do animal" required>
+        </div>
+    
+        <div class="mb-3">
+            <label for="id_especie" class="form-label"><b>Espécie</b></label>
+            <input type="text" name="especie" id="id_especie" class="form-control" placeholder="Ex: cachorro, gato..." required>
+        </div>
+    
+        <div class="mb-3">
+            <label for="id_genero" class="form-label"><b>Gênero</b></label>
+            <select name="genero" id="id_genero" class="form-control" required>
+                <option value="">Selecione o gênero</option>
+                <option value="Macho">Macho</option>
+                <option value="Fêmea">Fêmea</option>
+            </select>
+        </div>
+    
+        <div class="mb-3">
+            <label for="id_cidade" class="form-label"><b>Cidade</b></label>
+            <input type="text" name="cidade" id="id_cidade" class="form-control" placeholder="Digite a cidade do animal" required>
+        </div>
+    
+        <div class="mb-3">
+            <label for="id_descricao" class="form-label"><b>Descrição</b></label>
+            <textarea name="descricao" cols="40" rows="4" class="form-control" placeholder="Digite uma breve descrição sobre o animal..." required id="id_descricao"></textarea>
+        </div>
+    
+        <div class="mb-3">
+            <label class="form-label"><b>Imagem</b></label><br>
+            <label for="id_imagem" class="custom-file-upload">
+              Escolher imagem
+            </label>
+            <input type="file" name="imagem" id="id_imagem" accept="image/*">
+          </div>
         <button type="submit" class="btn btn-success">Cadastrar</button>
     </form>
-
-    <a href="{% url 'index' %}">Voltar</a>
+    
+    <div class="mt-3 mb-4" style="margin-left: 20px;">
+        <a href="{% url 'index' %}" class="btn btn-secondary px-4">Voltar</a>
+    </div>
 
     {% include 'partials/footer.html' %}
 

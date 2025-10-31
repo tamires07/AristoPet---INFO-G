@@ -46,7 +46,8 @@
     <div class="container text-center">
         <h1><b>Cadastre-se</b></h1>
     </div>
-    <form class="formulario">
+    <form class="formulario" method="POST" action="{% url 'cadastro' %}">
+        {% csrf_token %}
         <div class="mb-3">
             <label for="nome" class="form-label"><b>Nome</b></label>
             <input type="text" class="form-control" id="nome" name="nome" placeholder="Digite seu nome" required>
